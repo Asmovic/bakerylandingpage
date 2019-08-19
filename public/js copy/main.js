@@ -1,35 +1,35 @@
-(function($) {
+(function ($) {
     "use strict";
     var isMobile = {
-        Android: function() {
+        Android: function () {
             return navigator.userAgent.match(/Android/i);
         },
-        BlackBerry: function() {
+        BlackBerry: function () {
             return navigator.userAgent.match(/BlackBerry/i);
         },
-        iOS: function() {
+        iOS: function () {
             return navigator.userAgent.match(/iPhone|iPad|iPod/i);
         },
-        Opera: function() {
+        Opera: function () {
             return navigator.userAgent.match(/Opera Mini/i);
         },
-        Windows: function() {
+        Windows: function () {
             return navigator.userAgent.match(/IEMobile/i);
         },
-        any: function() {
+        any: function () {
             return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
         }
     }
 
     function parallax() {
-        $('.bg--parallax').each(function() {
+        $('.bg--parallax').each(function () {
             var el = $(this),
                 xpos = "50%",
                 windowHeight = $(window).height();
             if (isMobile.any()) {
                 $(this).css('background-attachment', 'scroll');
             } else {
-                $(window).scroll(function() {
+                $(window).scroll(function () {
                     var current = $(window).scrollTop(),
                         top = el.offset().top,
                         height = el.outerHeight();
@@ -44,7 +44,7 @@
 
     function backgroundImage() {
         var databackground = $('[data-background]');
-        databackground.each(function() {
+        databackground.each(function () {
             if ($(this).attr('data-background')) {
                 var image_path = $(this).attr('data-background');
                 $(this).css({
@@ -57,7 +57,7 @@
     function menuBtnToggle() {
         var button = $('.menu-toggle');
         var menu = $('.menu');
-        button.on('click', function(e) {
+        button.on('click', function (e) {
             e.preventDefault();
             var self = $(this);
             if (!self.hasClass('active')) {
@@ -74,7 +74,7 @@
     function subMenuToggle() {
         var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         if (iOS == false) {
-            $('body').on('click', '.menu--mobile .menu-item-has-children > .sub-toggle', function(event) {
+            $('body').on('click', '.menu--mobile .menu-item-has-children > .sub-toggle', function (event) {
                 event.preventDefault();
                 var current = $(this).parent('.menu-item-has-children')
                 current.children('.sub-menu').slideToggle(350);
@@ -82,7 +82,7 @@
             });
         }
         else {
-            $('body').on('touchstart', '.menu--mobile .menu-item-has-children > .sub-toggle', function(event) {
+            $('body').on('touchstart', '.menu--mobile .menu-item-has-children > .sub-toggle', function (event) {
                 event.preventDefault();
                 var current = $(this).parent('.menu-item-has-children')
                 current.children('.sub-menu').slideToggle(350);
@@ -125,7 +125,7 @@
             scrollPosition = 0,
             checkpoint = 300;
         if (header.data('sticky') === true) {
-            $(window).scroll(function() {
+            $(window).scroll(function () {
                 var currentPosition = $(this).scrollTop();
                 if (currentPosition < scrollPosition) {
                     // On top
@@ -154,7 +154,7 @@
     function owlCarousel() {
         var target = $('.owl-slider');
         if (target.length > 0) {
-            target.each(function() {
+            target.each(function () {
                 var el = $(this),
                     dataAuto = el.data('owl-auto'),
                     dataLoop = el.data('owl-loop'),
@@ -221,11 +221,11 @@
         var searchOpen = $('.ps-search-btn'),
             searchClose = $('.ps-search__close'),
             searchbox = $('.ps-search');
-        searchOpen.on('click', function(e) {
+        searchOpen.on('click', function (e) {
             e.preventDefault();
             searchbox.addClass('open');
         });
-        searchClose.on('click', function(e) {
+        searchClose.on('click', function (e) {
             e.preventDefault();
             searchbox.removeClass('open');
         });
@@ -240,20 +240,20 @@
     function countUp() {
         var number = $('.number');
 
-        number.each(function() {
+        number.each(function () {
             var el = $(this);
             el.text('0');
 
             var waypoint = new Waypoint({
                 element: el,
-                handler: function(direction) {
+                handler: function (direction) {
                     el.countTo({
                         speed: '1500',
                         refreshInterval: 50
                     });
                     this.destroy();
                 },
-                offset: function() {
+                offset: function () {
                     return Waypoint.viewportHeight() - el.outerHeight() - 100;
                 }
             });
@@ -397,7 +397,7 @@
                         ]
                     }
                 ]
-            }).marker(function(map) {
+            }).marker(function (map) {
                 return {
                     position: map.getCenter(),
                     icon: 'images/marker.png',
@@ -405,10 +405,10 @@
                 };
             }).infowindow({
                 content: map.data('address')
-            }).then(function(infowindow) {
+            }).then(function (infowindow) {
                 var map = this.get(0);
                 var marker = this.get(1);
-                marker.addListener('click', function() {
+                marker.addListener('click', function () {
                     infowindow.open(map, marker);
                 });
             });
@@ -420,7 +420,7 @@
 
     function statusBar() {
         var statusBar = $('.ps-status-bar');
-        statusBar.each(function(e) {
+        statusBar.each(function (e) {
             var value = $(this).data('width');
             $(this).children('span').css('width', value + "%");
         })
@@ -441,7 +441,7 @@
                 step: step,
                 range: true,
                 values: [defaultMinValue, defaultMaxValue],
-                slide: function(event, ui) {
+                slide: function (event, ui) {
                     var values = ui.values;
                     min.text('$' + values[0]);
                     max.text('$' + values[1]);
@@ -508,16 +508,16 @@
 
     function inputNumberChange() {
         var number = $('.ps-number');
-        number.each(function() {
+        number.each(function () {
             var el = $(this),
                 numberValue = el.find('input').val();
-            el.find('.up').on('click', function(e) {
+            el.find('.up').on('click', function (e) {
                 e.preventDefault();
                 numberValue++;
                 el.find('input').val(numberValue);
                 el.find('input').attr('value', numberValue);
             });
-            el.find('.down').on('click', function(e) {
+            el.find('.down').on('click', function (e) {
                 e.preventDefault();
                 if (numberValue > 1) {
                     numberValue--;
@@ -527,16 +527,16 @@
 
             })
         });
-        $('.form-group--number').each(function() {
+        $('.form-group--number').each(function () {
             var el = $(this),
                 numberValue = el.find('input').val();
-            el.find('.plus').on('click', function(e) {
+            el.find('.plus').on('click', function (e) {
                 e.preventDefault();
                 numberValue++;
                 el.find('input').val(numberValue);
                 el.find('input').attr('value', numberValue);
             });
-            el.find('.minus').on('click', function(e) {
+            el.find('.minus').on('click', function (e) {
                 e.preventDefault();
                 if (numberValue > 1) {
                     numberValue--;
@@ -565,7 +565,7 @@
     function backToTop() {
         var scrollPos = 0;
         var element = $('#back2top');
-        $(window).scroll(function() {
+        $(window).scroll(function () {
             var scrollCur = $(window).scrollTop();
             if (scrollCur > scrollPos) {
                 // scroll down
@@ -582,7 +582,7 @@
             scrollPos = scrollCur;
         });
 
-        element.on('click', function() {
+        element.on('click', function () {
             $('html, body').animate({
                 scrollTop: '0px'
             }, 800);
@@ -592,13 +592,13 @@
     function subscribePopup() {
         var subscribe = $('#subscribe'),
             time = subscribe.data('time');
-        setTimeout(function() {
+        setTimeout(function () {
             if (subscribe.length > 0) {
                 subscribe.addClass('active');
                 $('body').css('overflow', 'hidden');
             }
         }, time);
-        $('.ps-popup__close').on('click', function(e) {
+        $('.ps-popup__close').on('click', function (e) {
             e.preventDefault();
             $(this).closest('.ps-popup').removeClass('active');
             $('body').css('overflow', 'auto');
@@ -614,7 +614,7 @@
         }
     }
 
-    $(function() {
+    $(function () {
         backgroundImage();
         parallax();
         owlCarousel();
@@ -635,12 +635,12 @@
         overFlowScrollbar();
     });
 
-    $(window).on('load', function() {
+    $(window).on('load', function () {
         $('.ps-loading').addClass('loaded');
-        subscribePopup();
+        // subscribePopup();
     });
 
-    $(window).on('load resize', function() {
+    $(window).on('load resize', function () {
         resizeHeader();
         stickyHeader();
     });
