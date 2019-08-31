@@ -8673,6 +8673,7 @@ a[data-tooltip]:hover:before, a[data-tooltip]:hover:after {
   width: calc(50% - 75px);
   padding-top: 44px;
   padding-left: 60px;
+  
 }
 
 .header--1 .navigation .navigation__right .header__actions {
